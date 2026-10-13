@@ -1,0 +1,301 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------ */
+/* Brand palette — raw tokens, usable as bg-deep, text-mango, etc.     */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-deep: #0b3c49;
+  --color-deep-900: #08303b;
+  --color-deep-950: #05232c;
+  --color-lagoon: #1a7f8e;
+  --color-lagoon-400: #3fa2b0;
+  --color-seafoam: #a8dadc;
+  --color-seafoam-100: #dcf0f1;
+  --color-pearl: #f7fafa;
+  --color-mango: #f4c95d;
+  --color-mango-600: #e2b23f;
+  --color-sand: #efe6d6;
+
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Semantic tokens (shadcn contract) mapped onto the palette           */
+/* ------------------------------------------------------------------ */
+:root {
+  --radius: 1rem;
+
+  --background: var(--color-pearl);
+  --foreground: var(--color-deep);
+  --surface: #eef5f6; /* alternating section background */
+  --card: #ffffff;
+  --card-foreground: var(--color-deep);
+  --popover: #ffffff;
+  --popover-foreground: var(--color-deep);
+  --primary: var(--color-deep);
+  --primary-foreground: var(--color-pearl);
+  --secondary: var(--color-lagoon);
+  --secondary-foreground: #ffffff;
+  --accent: var(--color-seafoam-100);
+  --accent-foreground: var(--color-deep);
+  --muted: #e6f0f1;
+  --muted-foreground: #4f6f77;
+  --border: #d5e4e6;
+  --input: #c9dcdf;
+  --ring: var(--color-lagoon);
+  --destructive: #c2410c;
+  --cta: var(--color-mango);
+  --cta-foreground: var(--color-deep);
+  --cta-hover: var(--color-mango-600);
+}
+
+.dark {
+  --background: var(--color-deep);
+  --foreground: var(--color-pearl);
+  --surface: var(--color-deep-900);
+  --card: #0f4654;
+  --card-foreground: var(--color-pearl);
+  --popover: #0d4250;
+  --popover-foreground: var(--color-pearl);
+  --primary: var(--color-seafoam);
+  --primary-foreground: var(--color-deep);
+  --secondary: var(--color-lagoon-400);
+  --secondary-foreground: var(--color-deep-950);
+  --accent: #155766;
+  --accent-foreground: var(--color-pearl);
+  --muted: #104a58;
+  --muted-foreground: #9fc6cb;
+  --border: rgb(168 218 220 / 0.14);
+  --input: rgb(168 218 220 / 0.22);
+  --ring: var(--color-seafoam);
+  --destructive: #fb923c;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 6px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+  --color-cta-hover: var(--cta-hover);
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                           */
+/* ------------------------------------------------------------------ */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 88rem;
+  padding-inline: 1.25rem;
+  @variant sm {
+    padding-inline: 2rem;
+  }
+  @variant lg {
+    padding-inline: 3rem;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+@utility section-y {
+  padding-block: 5rem;
+  @variant md {
+    padding-block: 7rem;
+  }
+  @variant lg {
+    padding-block: 8.5rem;
+  }
+}
+
+@utility text-balance-pretty {
+  text-wrap: balance;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-balance;
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+  }
+  ::selection {
+    background: var(--color-seafoam);
+    color: var(--color-deep);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* View transitions (React <ViewTransition> + browser API)             */
+/* ------------------------------------------------------------------ */
+:root {
+  --duration-exit: 160ms;
+  --duration-enter: 260ms;
+  --duration-move: 420ms;
+}
+
+::view-transition {
+  pointer-events: none;
+}
+
+/* Root crossfade for any navigation */
+::view-transition-old(root) {
+  animation: var(--duration-exit) ease-in both vt-fade reverse;
+}
+::view-transition-new(root) {
+  animation: var(--duration-enter) ease-out var(--duration-exit) both vt-fade;
+}
+
+/* Keep the header anchored while content transitions */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* Shared-element morph (e.g. room card image → room hero) */
+::view-transition-group(.morph) {
+  animation-duration: var(--duration-move);
+  animation-timing-function: var(--ease-out-expo);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-blur;
+}
+
+/* Directional navigation */
+::view-transition-old(.nav-forward) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-exit) ease-in both vt-fade reverse,
+    var(--duration-move) ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-forward) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both vt-fade,
+    var(--duration-move) ease-in-out both vt-slide;
+}
+::view-transition-old(.nav-back) {
+  --slide-offset: 60px;
+  animation:
+    var(--duration-exit) ease-in both vt-fade reverse,
+    var(--duration-move) ease-in-out both vt-slide reverse;
+}
+::view-transition-new(.nav-back) {
+  --slide-offset: -60px;
+  animation:
+    var(--duration-enter) ease-out var(--duration-exit) both vt-fade,
+    var(--duration-move) ease-in-out both vt-slide;
+}
+
+@keyframes vt-fade {
+  from {
+    filter: blur(3px);
+    opacity: 0;
+  }
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+@keyframes vt-slide {
+  from {
+    translate: var(--slide-offset);
+  }
+  to {
+    translate: 0;
+  }
+}
+@keyframes vt-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}

@@ -1,7 +1,15 @@
 # Azure Lagoon Resort — Architecture Proposal
 
-Status: **Draft, awaiting approval.** Nothing is scaffolded yet. Once this is
-approved, Stage 1 (design tokens, layout, landing page) starts.
+Status: **Approved.** Decisions: fictional Maldives location (Nalhoara Island,
+Baa Atoll), hosted Supabase project, guest checkout only (auth is for the admin),
+and one `rooms` row per bookable unit.
+
+| Stage | Scope | State |
+| --- | --- | --- |
+| 1 | Design tokens, layout, landing page | Done — awaiting review |
+| 2 | Rooms listing and detail (+ Supabase schema and seed) | Next |
+| 3 | Booking flow + Stripe | — |
+| 4 | Admin dashboard | — |
 
 ## Stack (current versions on npm as of 2026‑10‑13)
 
